@@ -1,0 +1,111 @@
+# Russian translations for PROJECT.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-06-07 06:16+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.15.0\n"
+
+#: bot/handlers/captcha.py:37
+msgid "The goal has not been accomplished yet, please try again."
+msgstr ""
+
+#: bot/handlers/captcha.py:39
+msgid "<b>Meet</b> captcha:"
+msgstr ""
+
+#: bot/handlers/export_users.py:29
+msgid "user counter: <b>{count}</b>"
+msgstr ""
+
+#: bot/handlers/language.py:24
+msgid "<b>Meet</b> your language: "
+msgstr ""
+
+#: bot/handlers/menu.py:71
+msgid ""
+"Good job! Now you’re participating in our giveaway. \n"
+"\n"
+"Points: {points}. \n"
+"\n"
+"Invite friends to get more points: \n"
+"\n"
+"Invite link: {invite_link}"
+msgstr ""
+
+#: bot/handlers/menu.py:85
+msgid "🔄 Update"
+msgstr ""
+
+#: bot/handlers/subscription.py:87
+msgid "<b>Meet</b> and subscribe our official communities:"
+msgstr ""
+
+#: bot/handlers/subscription.py:89
+msgid "Looks like you haven’t subscribed to our communities. Please try again."
+msgstr ""
+
+#: bot/handlers/subscription.py:97
+msgid "✅ Done"
+msgstr ""
+
+#: bot/handlers/subscription.py:118
+msgid ""
+"Brilliant! The next step is to <b>meet</b> our Twitter Page and send your"
+" Twitter username (@username format) below:"
+msgstr ""
+
+#: bot/handlers/subscription.py:147
+msgid ""
+"Spectacular, last step! <b>Meet</b> our Youtube, subscribe and provide a "
+"screenshot:"
+msgstr ""
+
+#: bot/keyboards/inline/navigation.py:19
+msgid "back button"
+msgstr "« back"
+
+#: bot/keyboards/inline/navigation.py:23
+msgid "back_to_menu button"
+msgstr "« menu"
+
+#~ msgid "welcome message"
+#~ msgstr ""
+#~ "<b>Welcome, you are participant!\n"
+#~ "\n"
+#~ "Referrals count: </b>"
+
+#~ msgid "captcha message"
+#~ msgstr "<b>Please, solve captcha</b>"
+
+#~ msgid "check_subscription button"
+#~ msgstr "✅ Check subscription"
+
+#~ msgid "subscription_request message"
+#~ msgstr "Please subscribe to our resources to continue:"
+
+#~ msgid "try_subscription message"
+#~ msgstr "We don't see you subscribed, please try again."
+
+#~ msgid "<b>Meet captcha</b>:"
+#~ msgstr ""
+
+#~ msgid "<b>Meet</b> and subscribe our official communities: Telegram"
+#~ msgstr ""
+
+#~ msgid "update_statistic button"
+#~ msgstr "🔄 Update stats"
+
