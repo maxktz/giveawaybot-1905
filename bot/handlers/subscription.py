@@ -22,16 +22,16 @@ SubscribeValuesType: TypeAlias = dict[str | int, str]
 
 telegram_chat_ids: dict[TargetSubscriber, SubscribeValuesType] = {
     "everyone": {
-        -1002001545830: "gb1905 Telegram",
+        # -1002001545830: "gb1905 Telegram",
     },
     "by_language_code": {
         "ru": {
-            # -1002129933465: "Telegram Channel",
-            # -1002127860743: "Telegram Chat",
+            -1002129933465: "Telegram Channel",
+            -1002127860743: "Telegram Chat",
         },
         "en": {
-            # -1002144265171: "Telegram Channel",
-            # -1002127860743: "Telegram Chat",
+            -1002144265171: "Telegram Channel",
+            -1002127860743: "Telegram Chat",
         },
     },
 }
