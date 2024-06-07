@@ -61,9 +61,9 @@ async def get_subscribe_values_for_user(
 
     by_language_code = subscribe_values.get("by_language_code")
     if by_language_code:
-        code = await get_language_code(session, user_id)
+        user_lang_code = await get_language_code(session, user_id)
         for language_code in by_language_code:
-            if key == code:
+            if language_code == user_lang_code:
                 for key, value in by_language_code[language_code].items():
                     values[key] = value
 
