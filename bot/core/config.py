@@ -88,6 +88,7 @@ class CacheSettings(EnvBaseSettings):
 class Settings(BotSettings, DBSettings, CacheSettings):
     DEBUG: bool = False
     SENTRY_DSN: str | None = None
+    USERS_GSHEET_URL: str
 
 
 settings = Settings()

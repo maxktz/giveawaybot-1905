@@ -27,3 +27,4 @@ class UserModel(Base):
     is_blocked: Mapped[bool] = mapped_column(default=False)
     is_premium: Mapped[bool] = mapped_column(default=False)
     is_verified: Mapped[bool] = mapped_column(default=False)
+    is_participant: Mapped[bool] = mapped_column(default=False)

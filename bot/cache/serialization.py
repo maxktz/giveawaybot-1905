@@ -19,10 +19,12 @@ class AbstractSerializer(ABC):
 class PickleSerializer(AbstractSerializer):
     "Serialize values using pickle."
 
-    def serialize(self, obj: Any) -> bytes:
+    @staticmethod
+    def serialize(obj: Any) -> bytes:
         return pickle.dumps(obj)
 
-    def deserialize(self, obj: bytes) -> Any:
+    @staticmethod
+    def deserialize(obj: bytes) -> Any:
         "Deserialize values using pickle."
         return pickle.loads(obj)
 
@@ -30,9 +32,11 @@ class PickleSerializer(AbstractSerializer):
 class JSONSerializer(AbstractSerializer):
     "Serialize values using JSON."
 
-    def serialize(self, obj: Any) -> bytes:
+    @staticmethod
+    def serialize(obj: Any) -> bytes:
         return orjson.dumps(obj)
 
-    def deserialize(self, obj: str) -> Any:
+    @staticmethod
+    def deserialize(obj: str) -> Any:
         "Deserialize values using JSON."
         return orjson.loads(obj)

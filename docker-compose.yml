@@ -20,6 +20,7 @@ services:
     volumes:
       - ./bot:/usr/src/app/bot
       - ./migrations:/usr/src/app/migrations
+      - ~/photos:/app/photos
 
   
   postgres:
@@ -84,3 +85,4 @@ networks:
 volumes:
   postgres-data: {}
   redis-data: {}
+  photos: {}

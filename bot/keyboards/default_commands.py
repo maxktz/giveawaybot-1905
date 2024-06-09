@@ -1,49 +1,21 @@
-from __future__ import annotations
-from typing import TYPE_CHECKING
-
+from aiogram import Bot
 from aiogram.types import BotCommand, BotCommandScopeDefault
 
-if TYPE_CHECKING:
-    from aiogram import Bot
-
 users_commands: dict[str, dict[str, str]] = {
-    # "en": {
-    #     "help": "help",
-    #     "contacts": "developer contact details",
-    #     "menu": "main menu with earning schemes",
-    #     "settings": "setting information about you",
-    #     "supports": "support contacts",
-    # },
-    # "uk": {
-    #     "help": "help",
-    #     "contacts": "developer contact details",
-    #     "menu": "main menu with earning schemes",
-    #     "settings": "setting information about you",
-    #     "supports": "support contacts",
-    # },
-    # "ru": {
-    #     "help": "help",
-    #     "contacts": "developer contact details",
-    #     "menu": "main menu with earning schemes",
-    #     "settings": "setting information about you",
-    #     "supports": "support contacts",
-    # },
+    "en": {
+        "menu": "Main menu",
+        "language": "Сменить язык",
+    },
+    "ru": {
+        "menu": "Главное меню",
+        "language": "Сменить язык",
+    },
 }
 
 admins_commands: dict[str, dict[str, str]] = {
     **users_commands,
-    "en": {
-        "ping": "Check bot ping",
-        "stats": "Show bot stats",
-    },
-    "uk": {
-        "ping": "Check bot ping",
-        "stats": "Show bot stats",
-    },
-    "ru": {
-        "ping": "Check bot ping",
-        "stats": "Show bot stats",
-    },
+    "en": {},
+    "ru": {},
 }
 
 

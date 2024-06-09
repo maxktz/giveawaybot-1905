@@ -10,7 +10,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from captcha.image import ImageCaptcha
 from aiogram.fsm.state import StatesGroup, State
 
-from bot.services.users import set_is_verified
+from bot.services.users import get_language_code, set_is_verified
 
 router = Router()
 
@@ -30,13 +30,16 @@ class States(StatesGroup):
 async def send_captcha(
     bot: Bot,
     user_id: int,
+    session: AsyncSession,
     state: FSMContext,
     retried: bool = False,
 ) -> None:
+    locale = await get_language_code(session, user_id)
+
     if retried:
-        text = _("The goal has not been accomplished yet, please try again.")
+        text = _("The goal has not been accomplished yet, please try again.", locale=locale)
     else:
-        text = _("<b>Meet</b> captcha:")
+        text = _("<b>Meet</b> captcha:", locale=locale)
 
     captcha_text = _cached_captcha_texts.get(user_id)
     if captcha_text is None:
@@ -70,7 +73,7 @@ async def handle_captcha(
         await set_is_verified(session, user.id, True)
         return await send_menu(bot=bot, session=session, user_id=user.id, state=state)
     _cached_captcha_texts[user.id] = _gen_captcha_text()
-    await send_captcha(bot=bot, user_id=user.id, state=state, retried=True)
+    await send_captcha(bot=bot, user_id=user.id, session=session, state=state, retried=True)
 
 
 def _gen_captcha_image(text: str) -> BufferedInputFile:

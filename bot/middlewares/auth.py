@@ -1,7 +1,7 @@
 from collections.abc import Awaitable, Callable
 from typing import Any
 
-from aiogram import BaseMiddleware
+from aiogram import BaseMiddleware, Bot
 from aiogram.types import Message
 from loguru import logger
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -26,7 +26,7 @@ class AuthMiddleware(BaseMiddleware):
 
         session: AsyncSession = data["session"]
         # state: FSMContext = data["state"]
-        # bot: Bot = data["bot"]
+        bot: Bot = data["bot"]
         message: Message = event
         user = message.from_user
 
@@ -36,6 +36,6 @@ class AuthMiddleware(BaseMiddleware):
         if not await user_exists(session, user.id):
             referrer_id = find_command_argument(message.text)
             logger.info(f"new user registration | user_id: {user.id} | message: {message.text}")
-            await add_user(session=session, user=user, referrer_id=referrer_id)
+            await add_user(session=session, user=user, referrer_id=referrer_id, bot=bot)
 
         return await handler(event, data)

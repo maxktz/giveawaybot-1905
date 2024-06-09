@@ -7,6 +7,7 @@ from aiogram.fsm.context import FSMContext
 from bot.bot_controller import send_message, try_delete_message
 from sqlalchemy.ext.asyncio import AsyncSession
 
+# from bot.database.database import sessionmaker
 from bot.services.users import set_language_code
 
 router = Router(name="language")
@@ -42,10 +43,13 @@ async def send_language(bot: Bot, user_id: str, state: FSMContext) -> None:
 async def handle_response(
     query: CallbackQuery, bot: Bot, session: AsyncSession, state: FSMContext
 ) -> None:
+    from .menu import send_menu
+
     user: aiogram.types.User = query.from_user
     language_code = query.data.split(":", 1)[1]
     await set_language_code(session, query.from_user.id, language_code)
 
-    from .menu import send_menu
-
-    return await send_menu(bot=bot, session=session, user_id=user.id, state=state)
+    # await session.close()
+    # async with sessionmaker() as session:
+    await send_menu(bot=bot, session=session, user_id=user.id, state=state)
+    return

@@ -5,17 +5,20 @@ from aiogram.fsm.context import FSMContext
 from bot.bot_controller import send_message, try_delete_message
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from bot.handlers.subscription import send_telegram_subscriptions, send_youtube_subscriptions
+from bot.handlers.subscription import (
+    send_telegram_subscriptions,
+    send_youtube_subscriptions,
+)
 from bot.services.users import (
+    get_is_participant,
     get_language_code,
     get_twitter_username,
     get_user_referrals_count,
     get_youtube_screenshot,
-    is_verified,
+    get_is_verified,
+    set_is_participant,
 )
 
-# in funcs:
-# from bot.handlers.language import send_language
 
 router = Router(name="menu")
 
@@ -41,26 +44,36 @@ async def send_menu(bot: Bot, session: AsyncSession, user_id: str, state: FSMCon
     from .captcha import send_captcha
     from .subscription import is_subscribed_telegram_chats, send_twitter_subscriptions
 
-    if not await get_language_code(session, user_id):
-        return await send_language(bot, user_id, state)
+    locale = await get_language_code(session, user_id)
+    if not locale:
+        await send_language(bot, user_id, state)
+        return
 
-    if not await is_verified(session, user_id):
-        return await send_captcha(bot, user_id, state)
+    is_participant = await get_is_participant(session, user_id)
+
+    if not is_participant:
+        if not await get_is_verified(session, user_id):
+            await send_captcha(bot=bot, user_id=user_id, session=session, state=state)
+            return
 
     if not await is_subscribed_telegram_chats(session, bot, user_id):
-        return await send_telegram_subscriptions(
-            session=session, bot=bot, user_id=user_id, state=state
-        )
+        if is_participant:
+            await set_is_participant(bot, session, user_id, False)
+        await send_telegram_subscriptions(session=session, bot=bot, user_id=user_id, state=state)
+        return
 
-    if not await get_twitter_username(session, user_id):
-        return await send_twitter_subscriptions(
-            session=session, bot=bot, user_id=user_id, state=state
-        )
+    if not is_participant:
 
-    if not await get_youtube_screenshot(session, user_id):
-        return await send_youtube_subscriptions(
-            session=session, bot=bot, user_id=user_id, state=state
-        )
+        if not await get_twitter_username(session, user_id):
+            await send_twitter_subscriptions(session=session, bot=bot, user_id=user_id, state=state)
+            return
+
+        if not await get_youtube_screenshot(session, user_id):
+            return await send_youtube_subscriptions(
+                session=session, bot=bot, user_id=user_id, state=state
+            )
+
+        await set_is_participant(bot, session, user_id, True)
 
     tempdata = await state.get_data()
 
@@ -75,7 +88,8 @@ async def send_menu(bot: Bot, session: AsyncSession, user_id: str, state: FSMCon
         "\n"
         "Invite friends to get more points: \n"
         "\n"
-        "Invite link: {invite_link}"
+        "Invite link: {invite_link}",
+        locale=locale,
     ).format(
         points=points,
         invite_link=f"t.me/{bot_username}?start={user_id}",

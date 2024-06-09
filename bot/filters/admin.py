@@ -2,7 +2,7 @@ from aiogram.filters import BaseFilter
 from aiogram.types import Message
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from bot.services.users import is_admin
+from bot.services.users import get_is_admin
 
 
 class AdminFilter(BaseFilter):
@@ -14,4 +14,4 @@ class AdminFilter(BaseFilter):
 
         user_id = message.from_user.id
 
-        return await is_admin(session=session, user_id=user_id)
+        return await get_is_admin(session=session, user_id=user_id)

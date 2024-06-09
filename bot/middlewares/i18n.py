@@ -13,35 +13,33 @@ pybabel update -i bot/locales/messages.pot -d bot/locales -D messages
 
 """
 
-from __future__ import annotations
-from typing import TYPE_CHECKING, Any
-
+from typing import Any
 from aiogram.utils.i18n.middleware import I18nMiddleware
-
 from bot.services.users import get_language_code
 
-if TYPE_CHECKING:
-    from aiogram.types import CallbackQuery, InlineQuery, Message
-    from sqlalchemy.ext.asyncio import AsyncSession
+from aiogram.types import TelegramObject
+
+from sqlalchemy.ext.asyncio import AsyncSession
 
 
 class ACLMiddleware(I18nMiddleware):
     DEFAULT_LANGUAGE_CODE: str = "en"
-    ALL_LANGUAGE_CODES: list[str] = ["en", "ru", "uk"]
+    ALLOWED_LANGUAGE_CODES: list[str] = ["en", "ru", "uk"]
 
-    async def get_locale(
-        self, event: Message | CallbackQuery | InlineQuery, data: dict[str, Any]
-    ) -> str:
+    async def get_locale(self, event: TelegramObject, data: dict[str, Any]) -> str:
+
         session: AsyncSession = data["session"]
 
-        if not event.from_user:
+        if not getattr(event, "from_user", None):
             return self.DEFAULT_LANGUAGE_CODE
 
         user_id = event.from_user.id
         language_code: str | None = await get_language_code(session=session, user_id=user_id)
 
-        return (
+        language_code = (
             language_code
-            if language_code in self.ALL_LANGUAGE_CODES
+            if language_code in self.ALLOWED_LANGUAGE_CODES
             else self.DEFAULT_LANGUAGE_CODE
         )
+
+        return language_code

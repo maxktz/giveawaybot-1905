@@ -25,7 +25,7 @@ msgstr "Цель еще не достигнута, попробуйте еще �
 
 #: bot/handlers/captcha.py:39
 msgid "<b>Meet</b> captcha:"
-msgstr "Знакомтесь с капчей:"
+msgstr "Знакомьтесь с капчей:"
 
 #: bot/handlers/export_users.py:29
 msgid "user counter: <b>{count}</b>"

@@ -21,17 +21,16 @@ TargetSubscriber: TypeAlias = Literal["everyone", "by_language_code"]
 SubscribeValuesType: TypeAlias = dict[str | int, str]
 
 telegram_chat_ids: dict[TargetSubscriber, SubscribeValuesType] = {
-    "everyone": {
-        # -1002001545830: "gb1905 Telegram",
-    },
+    "everyone": {},
     "by_language_code": {
         "ru": {
-            -1002129933465: "Telegram Channel",
-            -1002127860743: "Telegram Chat",
+            -1002001545830: "gb1905 Telegram",
+            # -1002129933465: "Telegram Channel",
+            # -1002127860743: "Telegram Chat",
         },
         "en": {
-            -1002144265171: "Telegram Channel",
-            -1002127860743: "Telegram Chat",
+            # -1002144265171: "Telegram Channel",
+            # -1002127860743: "Telegram Chat",
         },
     },
 }
@@ -185,10 +184,11 @@ async def youtube_screenshot_handler(
             session=session, user_id=user.id, youtube_screenshot=str(filename)
         )
         return await send_menu(bot=bot, session=session, user_id=user.id, state=state)
+
     return await send_youtube_subscriptions(session=session, bot=bot, user_id=user.id, state=state)
 
 
-@router.message(States.twitter_username, F.text.regexp(r"^@.+$"))
+@router.message(States.twitter_username, F.text.regexp(r"^@\w{1,15}$"))
 async def twitter_username_handler(
     message: Message, session: AsyncSession, bot: Bot, state: FSMContext
 ):
@@ -221,7 +221,6 @@ async def check_telegram_subscription_on_query(
     )
 
 
-# @cached(ttl=20, key_builder=lambda session, bot, user_id: build_key(user_id))
 async def is_subscribed_telegram_chats(session: AsyncSession, bot: Bot, user_id: int) -> bool:
     if telegram_chat_ids:
         for chat_id in await get_user_telegram_chats_to_subscribe(session=session, user_id=user_id):
