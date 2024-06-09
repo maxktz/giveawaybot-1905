@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    container_name: bot
+    container_name: giveaway_bot_1905_bot
     restart: always
     env_file:
       - .env
@@ -25,7 +25,7 @@ services:
   
   postgres:
     image: postgres:14-alpine
-    container_name: postgres
+    container_name: giveaway_bot_1905_postgres
     restart: always
     env_file:
       - .env
@@ -41,7 +41,7 @@ services:
 
   pgbouncer:
     image: edoburu/pgbouncer
-    container_name: pgbouncer
+    container_name: giveaway_bot_1905_pgbouncer
     restart: always
     env_file:
       - .env
@@ -63,7 +63,7 @@ services:
 
   redis:
     image: redis:7-alpine
-    container_name: redis
+    container_name: giveaway_bot_1905_redis
     restart: always
     env_file:
       - .env
