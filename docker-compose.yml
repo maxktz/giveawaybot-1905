@@ -20,7 +20,7 @@ services:
     volumes:
       - ./bot:/usr/src/app/bot
       - ./migrations:/usr/src/app/migrations
-      - ~/photos:/app/photos
+      - ~/giveaway_bot_1905_photos:/app/photos
 
   
   postgres:
