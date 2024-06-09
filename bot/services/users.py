@@ -256,11 +256,14 @@ async def set_is_participant(
         send_new_referral_notification,
         send_lost_referral_notification,
     )
+    from .gsheets import update_users_sheet
 
     stmt = update(UserModel).where(UserModel.id == user_id).values(is_participant=is_participant)
     await session.execute(stmt)
     await session.commit()
     await set_cache(key=key_buider(user_id, func=get_is_participant), value=is_participant)
+
+    await update_users_sheet(session)
 
     referrer_id = await get_user_referrer_id(session, user_id)
     try:
@@ -280,8 +283,28 @@ async def set_is_participant(
 
 
 def count_points_per_referrals(referrals: int) -> int:
-    return 1
+    # now we give 1 point for each referral, so just return count itself
+    return referrals
 
 
 def count_all_points(referrals: int) -> int:
     return count_points_per_referrals(referrals) + 1
+
+
+async def get_user_sheet_field(session: AsyncSession, user: UserModel, field_name: str) -> str:
+    match field_name:
+        case "username":
+            if user.username:
+                return f"@{user.username}"
+            return user.first_name
+        case "points":
+            referrals = await get_user_referrals_count(session, user.id)
+            points = count_all_points(referrals)
+            return points
+        case "referrals":
+            referrals = await get_user_referrals_count(session, user.id)
+            return referrals
+        case "twitter_username":
+            if user.twitter_username:
+                return f"@{user.twitter_username}"
+    return getattr(user, field_name, None) or ""
