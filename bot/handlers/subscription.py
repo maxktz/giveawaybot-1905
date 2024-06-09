@@ -21,16 +21,31 @@ TargetSubscriber: TypeAlias = Literal["everyone", "by_language_code"]
 SubscribeValuesType: TypeAlias = dict[str | int, str]
 
 telegram_chat_ids: dict[TargetSubscriber, SubscribeValuesType] = {
-    "everyone": {},
+    "everyone": {
+        # TODO: change "everyone" to "all" and other keys be raw language codes
+        # -1002001545830: "gb1905 Telegram",  # test chat (not used in production)
+    },
     "by_language_code": {
         "ru": {
-            # -1002001545830: "gb1905 Telegram",
+            # -1002001545830: "gb1905 Telegram",  # test chat (not used in production)
             -1002129933465: "Telegram Channel",
+            # ├ title: MEETPAY RU
+            # ├ username: meetpay_ru
+            # └ type: channel
             -1002127860743: "Telegram Chat",
+            # ├ title: MEETPAY CHAT RU
+            # ├ username: meetpayru
+            # └ type: supergroup
         },
         "en": {
             -1002144265171: "Telegram Channel",
-            -1002127860743: "Telegram Chat",
+            # ├ title: MEETPAY NEWS EN
+            # ├ username: meetpay_news
+            # └ type: channel
+            -1002121632315: "Telegram Chat",
+            # ├ title: MEETPAY CHAT ENG
+            # ├ username: meetpay_chat
+            # └ type: supergroup
         },
     },
 }
