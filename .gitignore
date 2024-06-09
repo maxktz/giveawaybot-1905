@@ -2,7 +2,7 @@
 *.session-journal
 .obsidian
 /tmp
-.google_service_key.json
+.google_iam_key.json
 
 .vscode/*
 !.vscode/settings.json

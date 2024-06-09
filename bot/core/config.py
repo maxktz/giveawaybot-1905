@@ -89,6 +89,7 @@ class Settings(BotSettings, DBSettings, CacheSettings):
     DEBUG: bool = False
     SENTRY_DSN: str | None = None
     USERS_GSHEET_URL: str
+    GOOGLE_IAM_KEY_PATH: Path = ROOT_DIR / ".google_iam_key.json"
 
 
 settings = Settings()

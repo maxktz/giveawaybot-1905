@@ -1,10 +1,10 @@
 import gspread_asyncio
 from google.oauth2.service_account import Credentials
-from bot.services.core.config import GSHEET_AUTH_FILE
+from bot.core.config import settings
 
 
 def get_credentals() -> Credentials:
-    creds = Credentials.from_service_account_file(GSHEET_AUTH_FILE)
+    creds = Credentials.from_service_account_file(settings.GOOGLE_IAM_KEY_PATH)
     return creds.with_scopes(
         [
             "https://spreadsheets.google.com/feeds",
