@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-06-07 06:16+0300\n"
+"POT-Creation-Date: 2024-06-10 01:07+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -19,23 +19,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.15.0\n"
 
-#: bot/handlers/captcha.py:37
+#: bot/handlers/captcha.py:40
 msgid "The goal has not been accomplished yet, please try again."
 msgstr "Цель еще не достигнута, попробуйте еще раз."
 
-#: bot/handlers/captcha.py:39
+#: bot/handlers/captcha.py:42
 msgid "<b>Meet</b> captcha:"
-msgstr "Знакомьтесь с капчей:"
+msgstr "Встречайте капчу:"
 
 #: bot/handlers/export_users.py:29
 msgid "user counter: <b>{count}</b>"
 msgstr ""
 
-#: bot/handlers/language.py:24
+#: bot/handlers/language.py:25
 msgid "<b>Meet</b> your language: "
 msgstr "Выберите язык:"
 
-#: bot/handlers/menu.py:71
+#: bot/handlers/menu.py:84
 msgid ""
 "Good job! Now you’re participating in our giveaway. \n"
 "\n"
@@ -53,25 +53,37 @@ msgstr ""
 "\n"
 "Пригласительная ссылка: {invite_link}"
 
-#: bot/handlers/menu.py:85
+#: bot/handlers/menu.py:99
 msgid "🔄 Update"
 msgstr "🔄 Обновить"
 
-#: bot/handlers/subscription.py:87
-msgid "<b>Meet</b> and subscribe our official communities:"
-msgstr "Знакомься и подписывайся на наши официальные сообщества:"
+#: bot/handlers/referrals.py:20
+msgid "You have got a new referral! For {name} you got +{point} to your points"
+msgstr "У вас новый реферал! За {name} вы получили +{point} к вашим очкам."
 
-#: bot/handlers/subscription.py:89
+#: bot/handlers/referrals.py:36
+msgid ""
+"You have lost one of your referrals! {name} has left you and are not "
+"participating. -{point} points"
+msgstr ""
+"Вы потеряли одного из ваших рефералов! {name} покинул вас и больше не "
+"участвует. -{point} очков."
+
+#: bot/handlers/subscription.py:86
+msgid "<b>Meet</b> and subscribe our official communities:"
+msgstr "Встречай и подписывайся на наши официальные сообщества:"
+
+#: bot/handlers/subscription.py:88
 msgid "Looks like you haven’t subscribed to our communities. Please try again."
 msgstr ""
 "Похоже, вы не подписались на наши сообщества. Пожалуйста, попробуйте еще "
 "раз."
 
-#: bot/handlers/subscription.py:97
+#: bot/handlers/subscription.py:96
 msgid "✅ Done"
 msgstr "✅ Готово"
 
-#: bot/handlers/subscription.py:118
+#: bot/handlers/subscription.py:117
 msgid ""
 "Brilliant! The next step is to <b>meet</b> our Twitter Page and send your"
 " Twitter username (@username format) below:"
@@ -79,13 +91,13 @@ msgstr ""
 "Отлично! Следующим шагом будет встреча нашей страницы в Twitter и "
 "отправьте свое имя пользователя Twitter (формат @username) ниже:"
 
-#: bot/handlers/subscription.py:147
+#: bot/handlers/subscription.py:146
 msgid ""
 "Spectacular, last step! <b>Meet</b> our Youtube, subscribe and provide a "
 "screenshot:"
 msgstr ""
-"Прекрасно, последний шаг! Познакомьтесь с нашим Youtube, подпишитесь и "
-"сделайте скриншот:"
+"Прекрасно, последний шаг! Встречайте наш Youtube, подпишитесь и сделайте "
+"скриншот:"
 
 #: bot/keyboards/inline/navigation.py:19
 msgid "back button"
@@ -94,4 +106,8 @@ msgstr "« назад"
 #: bot/keyboards/inline/navigation.py:23
 msgid "back_to_menu button"
 msgstr "« меню"
+
+#: bot/middlewares/ask_language.py:64
+msgid "Meet your language: "
+msgstr "Встречайте свой язык:"
 
