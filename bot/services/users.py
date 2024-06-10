@@ -307,4 +307,5 @@ async def get_user_sheet_field(session: AsyncSession, user: UserModel, field_nam
         case "twitter_username":
             if user.twitter_username:
                 return f"@{user.twitter_username}"
-    return getattr(user, field_name, None) or ""
+    val = getattr(user, field_name, None)
+    return str(val) if val else ""
